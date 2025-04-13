@@ -30,6 +30,8 @@ TECTONIC_ERROR_PATTERN = re.compile(
     r"(?P<type>warning|error): (?P<file>[^:]+):(?P<line>\d+): (?P<message>.+)"
 )
 
+HEDGEDOC_GRAPHICS_PATH = Path("/var/lib/docker/volumes/hedgedoc_uploads/_data/")
+
 
 def parse_log(tex_path: Path, log_str: str) -> list[Error] | None:
     """
@@ -63,6 +65,9 @@ def tectonic_search_paths(search_paths: list[Path]) -> list[str]:
     Retorna: diretórios para busca pelo TECTONIC.
     """
     search_paths.extend(TEXINPUTS_PATHS)
+
+    # TODO: O DIRETÓRIO ESTÁ HARD-CODED!
+    search_paths.append(HEDGEDOC_GRAPHICS_PATH)
 
     return [f"-Zsearch-path={str(search_path)}" for search_path in search_paths]
 

@@ -6,7 +6,7 @@ from pathlib import Path
 import psycopg2
 from pydantic import ValidationError
 
-from diagr import Exam
+from diagr import VERSION, Exam
 from diagr.console import console
 from diagr.utils import Status
 
@@ -57,6 +57,14 @@ def main():
         prog="Diagramador",
         description="Cria arquivos .pdf de avaliações a partir de arquivos markdown.",
         epilog="Gabriel Braun, 2025",
+    )
+
+    # MOSTRA A VERSÃO DO DIAGRAMADOR.
+    parser.add_argument(
+        "-v",
+        "--version",
+        action="version",
+        version=f"DIAGR versão {VERSION}",
     )
 
     parser.add_argument(
